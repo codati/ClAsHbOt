@@ -18,6 +18,13 @@ Func FillBarracksStrategy0(Const $initialFillFlag, Const ByRef $availableTroopCo
 	  $breakersToQueue = 0
    EndIf
 
+   If $gWaitHeroesClicked Then
+      Local $heroesIsOk = IsColorPresent($rArmyCampsHeroesOkColor)
+      DebugWrite("heroes is ok ")
+   Else
+	  Local $heroesIsOk = True
+   EndIf
+
    ; Loop through each standard barracks window and queue troops
    Local $barracksCount = 1
 
@@ -29,7 +36,7 @@ Func FillBarracksStrategy0(Const $initialFillFlag, Const ByRef $availableTroopCo
 	  EndIf
 
 	  ; See if we are full up
-	  If IsColorPresent($rArmyCampsFullColor) Then
+	  If $heroesIsOk and IsColorPresent($rArmyCampsFullColor) Then
 		 $armyCampsFull = True
 		 DebugWrite("Barracks " & $barracksCount & " is showing full.")
 	  EndIf

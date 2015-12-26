@@ -19,6 +19,13 @@ Func FillBarracksStrategy2(Const $initialFillFlag, Const ByRef $availableTroopCo
 	  $breakersToQueue = 0
    EndIf
 
+   If $gWaitHeroesClicked Then
+      Local $heroesIsOk = IsColorPresent($rArmyCampsHeroesOkColor)
+      DebugWrite("heroes is ok ")
+   Else
+	  Local $heroesIsOk = True
+   EndIf
+
    ; Loop through each standard and dark barracks window and queue troops
    Local $barracksCount = 1
 
@@ -39,7 +46,7 @@ Func FillBarracksStrategy2(Const $initialFillFlag, Const ByRef $availableTroopCo
 	  EndIf
 
 	  ; See if we are full up
-	  If IsColorPresent($rArmyCampsFullColor) Then $armyCampsFull = True
+	   If $heroesIsOk and IsColorPresent($rArmyCampsFullColor) Then $armyCampsFull = True
 
 	  ; Find the slots for the troops
 	  Local $troopSlots[$eTroopCount][4]

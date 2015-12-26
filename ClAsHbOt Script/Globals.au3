@@ -24,7 +24,7 @@ Global $gIniFile = "CoC Bot.ini"
 
 ; GUI
 Global $gKeepOnlineClicked = False, $gCollectLootClicked = False, $gDonateTroopsClicked = False, $gDonateTroopsStartup = False
-Global $gFindMatchClicked = False, $gAutoSnipeClicked = False, $gAutoRaidClicked = False
+Global $gFindMatchClicked = False, $gAutoSnipeClicked = False, $gAutoRaidClicked = False, $gWaitHeroesClicked = false
 
 ; Lists of troop and spell types
 Global Enum $eTroopBarbarian, $eTroopArcher, $eTroopGiant, $eTroopGoblin, $eTroopWallBreaker, _

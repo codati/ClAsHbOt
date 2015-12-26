@@ -147,6 +147,7 @@ Func SaveSettings()
    IniWrite($gIniFile, "General", "Dead Bases Only", _GUICtrlButton_GetCheck($GUI_AutoRaidDeadBases))
    IniWrite($gIniFile, "General", "Ignore Storages", _GUICtrlButton_GetCheck($GUI_AutoRaidIgnoreStorages))
    IniWrite($gIniFile, "General", "Raid Strategy", _GUICtrlComboBox_GetCurSel($GUI_AutoRaidStrategyCombo))
+   IniWrite($gIniFile, "General", "Wait heroes", _GUICtrlButton_GetCheck($GUI_WaitHeroesCheckBox))
 EndFunc
 
 Func _Boolean($fValue)

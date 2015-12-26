@@ -14,6 +14,13 @@ Func FillBarracksStrategy3(Const $initialFillFlag, Const ByRef $availableTroopCo
    ; Loop through each standard barracks window and queue troops
    Local $barracksCount = ($initialFillFlag ? 1 : 5)
 
+   If $gWaitHeroesClicked Then
+      Local $heroesIsOk = IsColorPresent($rArmyCampsHeroesOkColor)
+      DebugWrite("heroes is ok ")
+   Else
+	  Local $heroesIsOk = True
+   EndIf
+
    While $barracksCount <= 5
 
 	  ; Click next standard barracks button on Army Manager Window, if unsuccessful, then try clicking dark
@@ -31,7 +38,7 @@ Func FillBarracksStrategy3(Const $initialFillFlag, Const ByRef $availableTroopCo
 	  EndIf
 
 	  ; See if we are full up
-	  If IsColorPresent($rArmyCampsFullColor) Then
+	   If $heroesIsOk and IsColorPresent($rArmyCampsFullColor) Then
 		 $armyCampsFull = True
 		 DebugWrite("Barracks " & $barracksCount & " is showing full.")
 	  EndIf

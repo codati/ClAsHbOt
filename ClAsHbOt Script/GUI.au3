@@ -11,7 +11,7 @@
 Global $GUI, $GUIImage, $GUIGraphic
 Global $GUI_Width=285, $GUI_Height=440
 Global $GUI_KeepOnlineCheckBox, $GUI_CollectLootCheckBox, $GUI_DonateTroopsCheckBox, _
-	  $GUI_FindMatchCheckBox, $GUI_AutoSnipeCheckBox, $GUI_AutoRaidCheckBox
+	  $GUI_FindMatchCheckBox, $GUI_AutoSnipeCheckBox, $GUI_AutoRaidCheckBox, $GUI_WaitHeroesCheckBox
 Global $GUI_CloseButton
 Global $GUI_GoldEdit, $GUI_ElixEdit, $GUI_DarkEdit, $GUI_TownHallEdit, $GUI_AutoRaidUseBreakers, $GUI_AutoRaidBreakerCountEdit, _
 	  $GUI_AutoRaidDumpCups, $GUI_AutoRaidDeadBases, $GUI_AutoRaidIgnoreStorages, $GUI_AutoRaidDumpCupsThreshold, $GUI_AutoRaidStrategyCombo
@@ -105,7 +105,7 @@ Func InitGUI()
 
    ; Right side, auto raid options group
    $y += 29
-   $h=138
+   $h=158
    GUICtrlCreateGroup("Auto Raid/Snipe", $x, $y, $w, $h)
 
    $y += 14
@@ -126,6 +126,11 @@ Func InitGUI()
    $GUI_AutoRaidIgnoreStorages = GUICtrlCreateCheckbox("Ignore Storages", $x+5, $y, 110, 25)
    _GUICtrlButton_SetCheck($GUI_AutoRaidIgnoreStorages, IniRead($gIniFile, "General", "Ignore Storages", $BST_UNCHECKED))
 
+   $y += 19
+   $GUI_WaitHeroesCheckBox = GUICtrlCreateCheckbox("Wait heroes", $x+5, $y, $w-6, 25)
+   _GUICtrlButton_SetCheck($GUI_WaitHeroesCheckBox, IniRead($gIniFile, "General", "Wait heroes", $BST_UNCHECKED))
+   GUICtrlSetOnEvent($GUI_WaitHeroesCheckBox, "GUIWaitHeroesCheckBox")
+
    $y += 24
    GUICtrlCreateLabel("Strategy:", $x+5, $y, 116, 17)
 
@@ -139,7 +144,7 @@ Func InitGUI()
 
    ; Bottom
    $x = 10
-   $y = 272
+   $y = 292
    $w = 265
    $GUI_Winnings = GUICtrlCreateLabel("Net winnings: - / - / - / -", $x, $y, $w, 17)
 
@@ -219,6 +224,7 @@ EndFunc
 
 Func HotKeyPressed()
    Switch @HotKeyPressed
+
    Case "{F5}" ; Keep Online
 	  Local $chk = (_GUICtrlButton_GetCheck($GUI_KeepOnlineCheckBox) = $BST_CHECKED) ? True : False
 	  _GUICtrlButton_SetCheck($GUI_KeepOnlineCheckBox, $chk ? $BST_UNCHECKED : $BST_CHECKED)
@@ -258,6 +264,11 @@ EndFunc
 Func GUIKeepOnlineCheckBox()
    DebugWrite("Keep Online clicked")
    $gKeepOnlineClicked = (_GUICtrlButton_GetCheck($GUI_KeepOnlineCheckBox) = $BST_CHECKED) ? True : False
+EndFunc
+
+Func GUIWaitHeroesCheckBox()
+   DebugWrite("Wait heroes clicked")
+   $gWaitHeroesClicked = (_GUICtrlButton_GetCheck($GUI_WaitHeroesCheckBox) = $BST_CHECKED) ? True : False
 EndFunc
 
 Func GUICollectLootCheckBox()
